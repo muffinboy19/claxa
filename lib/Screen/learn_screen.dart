@@ -44,20 +44,22 @@ class _PositionedWidgetsState extends State<PositionedWidgets> {
               final horizontalDisplacement = (index % 2 == 0) ? -20.0 : 20.0; // Alternating horizontal displacement
 
               return Padding(
-                padding: EdgeInsets.only(top: verticalSpacing),
-                child: Align(
-                  alignment: Alignment(0.0, 0.0),
-                  child: Transform.translate(
-                    offset: Offset(horizontalDisplacement, 0.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedLesson = index;
-                        });
-                      },
-                      child: LessonWidget(
-                        lessonNumber: index + 1,
-                        selected: selectedLesson == index,
+                padding: const EdgeInsets.only(top: verticalSpacing),
+                child: Container(
+                  width: double.infinity, // Make the container width match the screen width
+                  child: Center(
+                    child: Transform.translate(
+                      offset: Offset(horizontalDisplacement, 0.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedLesson = index;
+                          });
+                        },
+                        child: LessonWidget(
+                          lessonNumber: index + 1,
+                          selected: selectedLesson == index,
+                        ),
                       ),
                     ),
                   ),
@@ -84,11 +86,11 @@ class DashedLinePainter extends CustomPainter {
 
     double dashWidth = 10;
     double dashSpace = 5;
-    double startY = 80; // Start from the first card's height
+    double startY = 0;
     double startX = size.width / 2;
 
     for (int i = 0; i < numberOfLessons; i++) {
-      double cardCenterY = startY + i * 160; // Adjust to start from the first card and space out vertically
+      double cardCenterY = startY + 80 + i * 160; // Adjust to start from the first card and space out vertically
       while (startY < cardCenterY) {
         canvas.drawLine(Offset(startX, startY), Offset(startX, startY + dashWidth), paint);
         startY += dashWidth + dashSpace;
@@ -135,5 +137,3 @@ class LessonWidget extends StatelessWidget {
     );
   }
 }
-
-
