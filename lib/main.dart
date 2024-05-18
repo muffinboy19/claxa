@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gleo_x/Screen/AfterLandingPage.dart';
 import 'package:gleo_x/Screen/HomePage.dart';
 import 'package:gleo_x/Screen/forgetPassword.dart';
 import 'package:gleo_x/Screen/otpPage.dart';
@@ -38,8 +39,7 @@ class MyApp extends StatelessWidget {
         '/forgot-password': (context) => const ForgotPasswordScreen(),
         '/otp-verification': (context) => const OTPVerificationScreen(),
         '/quiz': (context) => const QuizScreen(),
-
-
+        '/AfterLandingPage': (context) =>  AfterLandingPage(),
       },
     );
   }

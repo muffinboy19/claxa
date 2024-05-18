@@ -24,7 +24,7 @@ class _LandingPageState extends State<LandingPage> {
         curve: Curves.easeIn,
       );
     } else {
-      Navigator.of(context).pushReplacementNamed('/login');
+      Navigator.of(context).pushReplacementNamed('/AfterLandingPage');
     }
   }
 
