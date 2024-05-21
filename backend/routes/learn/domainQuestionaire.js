@@ -4,9 +4,9 @@ const lesson = require('../../utils/constants')
 const router = express.Router();
 
 // FetchDomainQuestionaire route
-router.get('/fetchDomainQuestionaire', (req, res) => {
+router.post('/fetchDomainQuestionaire', (req, res) => {
     // Get auth token from request
-    const authToken = req.headers.authorization;
+    const authToken = req.body.authorization;
 
     // TODO: Implement logic to fetch domain questionaire based on auth token
     // Replace the dummy data with your actual implementation
@@ -23,7 +23,7 @@ router.get('/fetchDomainQuestionaire', (req, res) => {
 // SubmitDomainQuestionaire route
 router.post('/submitDomainQuestionaire', (req, res) => {
     // Get auth token from request
-    const authToken = req.headers.authorization;
+    const authToken = req.body.authToken;
 
     // TODO: Implement logic to submit domain questionaire based on auth token
     // Replace the dummy data with your actual implementation

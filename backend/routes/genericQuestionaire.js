@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 // FetchUserInfoQuestionaire route
-router.get('/fetchUserInfoQuestionaire', (req, res) => {
+router.post('/fetchUserInfoQuestionaire', (req, res) => {
     // Get the auth token from the request
-    const authToken = req.query.authToken;
+    const authToken = req.body.authToken;
 
     // TODO: Implement the logic to fetch user info questionaire based on the auth token
     // Replace the following code with your actual implementation
@@ -50,7 +50,7 @@ router.get('/fetchUserInfoQuestionaire', (req, res) => {
 // SubmitUserInfoQuestionaire route
 router.post('/submitUserInfoQuestionaire', (req, res) => {
     // Get the auth token and answers from the request body
-    const { authToken, answers } = req.body;
+    let { authToken, answers } = req.body;
 
     // TODO: Implement the logic to submit user info questionaire and return the result
     // Replace the following code with your actual implementation

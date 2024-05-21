@@ -4,14 +4,14 @@ const router = express.Router();
 
 // Dummy data
 const completionData = {
-    hook: 'Dummy Hook',
-    description: 'Dummy Description'
+    hook: 'Are you sure, you are not a PRO?',
+    description: 'Great job!'
 };
 
 // Route: /fetchOnCompletion
 router.post('/fetchOnCompletion', (req, res) => {
     // Extract input data from request body
-    const { authToken, lessonIndex, lessonId, topic } = req.body;
+    let { authToken, lessonIndex, lessonId, topic } = req.body;
 
     // Perform any necessary operations with the input data
     // For now, we'll just send back the dummy data

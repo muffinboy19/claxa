@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Login route
 router.post('/login', (req, res) => {
-    const { validLogin } = req.body;
+    let { validLogin } = req.body;
 
     if (validLogin) {
         // Generate a dummy auth token
@@ -20,7 +20,7 @@ router.post('/login', (req, res) => {
 
 // Signup route
 router.post('/signup', (req, res) => {
-    const { validLogin } = req.body;
+    let { validLogin } = req.body;
 
     if (validLogin) {
         // Generate a dummy auth token

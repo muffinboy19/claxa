@@ -10,9 +10,9 @@ const instructions = {
 };
 
 router.post('/fetchExerciseInstruction', (req, res) => {
-    const { auth_token, description, validExercise } = req.body;
+    let { authToken, description} = req.body;
 
-    // Check if the auth_token is valid
+    // Check if the authToken is valid
     // You can implement your authentication logic here
 
     // Check if the description is valid
@@ -21,22 +21,20 @@ router.post('/fetchExerciseInstruction', (req, res) => {
     }
 
     // Find the instruction based on the description
-    var instruction = null;
-    if(validExercise){
-        instruction = description;
-    }
+    var instruction = description;
     if (!instruction) {
         return res.status(404).json({ error: 'Instruction not found' });
     }
 
     // Return the instruction
-    res.json({ instruction });
+    res.json({"Hook": "Are you ready for the exercise?",
+        "instruction": instruction });
 });
 
 router.post('/fetchExerciseResponse', (req, res) => {
-    const { auth_token, conversation, info } = req.body;
+    let { authToken, conversation, info } = req.body;
 
-    // Check if the auth_token is valid
+    // Check if the authToken is valid
     // You can implement your authentication logic here
 
     // Check if the conversation and info are valid
@@ -52,13 +50,13 @@ router.post('/fetchExerciseResponse', (req, res) => {
 });
 
 router.post('/submitExerciseResponse', (req, res) => {
-    const { auth_token, conversation, info, response } = req.body;
+    let { authToken, conversation, info } = req.body;
 
-    // Check if the auth_token is valid
+    // Check if the authToken is valid
     // You can implement your authentication logic here
 
     // Check if the conversation, info, and response are valid
-    if (!conversation || !info || !response) {
+    if (!conversation || !info ) {
         return res.status(400).json({ error: 'Invalid conversation, info, or response' });
     }
 

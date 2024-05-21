@@ -1,0 +1,352 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Gleo_Mobile_Backend",
+    "collectionId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+    "dateExported": "2024-05-21T14:41:04.499Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "8d0e70a0-0dae-4102-9f4f-8e8944c9db25",
+            "name": "lesson",
+            "containerId": "",
+            "created": "2024-05-19T19:42:42.200Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "5927fe34-9761-4ed7-8133-1231f94058bb",
+            "name": "generalQuestionaire",
+            "containerId": "",
+            "created": "2024-05-19T19:43:08.328Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "ba081452-d810-4395-8af0-0c5057fa2db1",
+            "name": "auth",
+            "containerId": "",
+            "created": "2024-05-19T19:43:14.859Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "99549d39-7bd2-4309-9c86-5aec7f485bf5",
+            "name": "profile",
+            "containerId": "",
+            "created": "2024-05-19T19:43:23.814Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "cb50f36d-f811-4b73-baa2-1fe570cfb5e3",
+            "name": "domainQuestionaire",
+            "containerId": "8d0e70a0-0dae-4102-9f4f-8e8944c9db25",
+            "created": "2024-05-21T12:10:39.530Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "20002449-1db9-4085-9160-cad500500cad",
+            "name": "exercise",
+            "containerId": "8d0e70a0-0dae-4102-9f4f-8e8944c9db25",
+            "created": "2024-05-21T13:01:00.773Z",
+            "sortNum": 80000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "c162761a-61d3-43a9-8909-0d4474213f82",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "ba081452-d810-4395-8af0-0c5057fa2db1",
+            "name": "login",
+            "url": "http://localhost:5050/api/v2/auth/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-05-19T19:42:12.078Z",
+            "modified": "2024-05-21T11:51:31.318Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"validLogin\": true\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "8e183110-564c-44de-9274-bddd89f2ac10",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "cb50f36d-f811-4b73-baa2-1fe570cfb5e3",
+            "name": "fetchDomainQuestionaire",
+            "url": "http://localhost:5050/api/v2/learn/domainQuestionaire/fetchDomainQuestionaire",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-05-21T12:09:26.858Z",
+            "modified": "2024-05-21T12:49:18.949Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"authToken\": \"dummyAuthToken\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "e88b35e7-7a3c-4f9b-adf3-678126860e15",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "20002449-1db9-4085-9160-cad500500cad",
+            "name": "fetchExerciseInstruction",
+            "url": "http://localhost:5050/api/v2/learn/exercise/fetchExerciseInstruction",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-05-21T12:10:03.992Z",
+            "modified": "2024-05-21T13:43:16.341Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"authToken\": \"dummyAuthToken\",\n  \"description\": \"Exercise Demo Starting\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "66551d6d-9370-49fd-b46a-40d710b960be",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "ba081452-d810-4395-8af0-0c5057fa2db1",
+            "name": "signup",
+            "url": "http://localhost:5050/api/v2/auth/signup",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-05-19T19:42:04.077Z",
+            "modified": "2024-05-21T11:52:25.836Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"validLogin\": true\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "04bebce9-6ee6-4bb7-a79b-f2530d009d7d",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "20002449-1db9-4085-9160-cad500500cad",
+            "name": "fetchExerciseResponse",
+            "url": "http://localhost:5050/api/v2/learn/exercise/fetchExerciseResponse",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-05-21T14:31:13.978Z",
+            "modified": "2024-05-21T14:34:44.442Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"authToken\": \"dummyAuthToken\",\n  \"conversation\": [[\"ai\", \"Initial Instruction\"], [\"human\", \"Answer to instruction\"]],\n  \"info\": {\n    \"exerciseType\": \"Single answer\"\n  }\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "ea78d85e-6c43-48b1-9e4b-14392eddf8fe",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "5927fe34-9761-4ed7-8133-1231f94058bb",
+            "name": "fetchUserInfoQuestionaire",
+            "url": "http://localhost:5050/api/v2/genericQuestionaire/fetchUserInfoQuestionaire",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-05-19T19:43:43.733Z",
+            "modified": "2024-05-21T12:06:02.632Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"authToken\": \"dummyAuthToken\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "038ff421-d805-47e7-bb39-aee92a5ac0c8",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "20002449-1db9-4085-9160-cad500500cad",
+            "name": "submitExerciseResponse",
+            "url": "http://localhost:5050/api/v2/learn/exercise/submitExerciseResponse",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-05-21T14:37:07.099Z",
+            "modified": "2024-05-21T14:39:39.299Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"authToken\": \"dummyAuthToken\",\n  \"conversation\": [[\"ai\", \"Initial Instruction\"], [\"human\", \"Answer to instruction\"]],\n  \"info\": {\n    \"exerciseType\": \"Single answer\",\n    \"responseToCondier\": \"Last\"\n  }\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "296efedf-9ed2-448c-9c2a-4c4a48e28162",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "5927fe34-9761-4ed7-8133-1231f94058bb",
+            "name": "submitUserInfoQuestionaire",
+            "url": "http://localhost:5050/api/v2/genericQuestionaire/submitUserInfoQuestionaire",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-05-19T19:44:28.568Z",
+            "modified": "2024-05-21T12:08:51.237Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"authToken\": \"dummyAuthToken\",\n  \"answers\": [\"apple\", 20, \"SDE\"]\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "01ffd6e8-22ed-4891-a2fe-62da1d1907ad",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "99549d39-7bd2-4309-9c86-5aec7f485bf5",
+            "name": "fetchProfile",
+            "url": "http://localhost:5050/api/v2/profile/fetchProfile",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-05-19T19:44:44.401Z",
+            "modified": "2024-05-21T11:55:44.593Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"authToken\": \"dummyAuthToken\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "8fbef349-a1a2-4444-82d6-b656f3d8ae2d",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "99549d39-7bd2-4309-9c86-5aec7f485bf5",
+            "name": "saveProfile",
+            "url": "http://localhost:5050/api/v2/profile/saveProfile",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2024-05-19T19:44:52.775Z",
+            "modified": "2024-05-21T12:00:17.738Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"authToken\": \"dummyAuthToken\", \n  \"progress\": \"60\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "54f8ff6d-a106-40a2-9a6b-a75337162651",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "",
+            "name": "ping",
+            "url": "http://localhost:5050/",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-05-21T11:28:13.139Z",
+            "modified": "2024-05-21T11:28:35.649Z",
+            "headers": []
+        },
+        {
+            "_id": "ccb60856-b220-4886-9554-3095dd6a8d61",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "8d0e70a0-0dae-4102-9f4f-8e8944c9db25",
+            "name": "onCompletion",
+            "url": "http://localhost:5050/api/v2/learn/onCompletion/fetchOnCompletion",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2024-05-21T12:09:53.613Z",
+            "modified": "2024-05-21T13:33:24.513Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"authToken\": \"dummyAuthToken\",\n  \"lessonScore\": 80 \n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d9016466-9a63-4636-a2e3-a21c3ae8760a",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "8d0e70a0-0dae-4102-9f4f-8e8944c9db25",
+            "name": "fetchNextLesson",
+            "url": "http://localhost:5050/api/v2/learn/nextLesson/fetchNextLesson",
+            "method": "POST",
+            "sortNum": 105000,
+            "created": "2024-05-21T12:09:36.306Z",
+            "modified": "2024-05-21T13:15:58.456Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"authToken\": \"dummyAuthToken\",\n  \"currentLessonIndex\": 0,\n  \"currentDifficultyLevel\": \"beginner\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "41772c5c-9ee5-479f-ba30-ad1349d9c0b0",
+            "colId": "4f1496a6-8aa9-41c2-8dc5-9ed3d05365ca",
+            "containerId": "cb50f36d-f811-4b73-baa2-1fe570cfb5e3",
+            "name": "submitDomainQuestionaire",
+            "url": "http://localhost:5050/api/v2/learn/domainQuestionaire/submitDomainQuestionaire",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2024-05-21T12:11:01.225Z",
+            "modified": "2024-05-21T12:55:10.219Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"authToken\": \"dummyAuthToken\",\n  \"answers\": [\"answer1\", \"answer2\", \"answer1\"]\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "SqIH5ogRKvvccQFtgNIVHn8n4e-ZR-5YGHQ1or-BT1GbPE228qd8Tl_CoNlUsEe_aIgbkaRrRPDeKWpSZF8DRA"
+}

@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 // FetchProfile route
-router.get('fetchProfile', (req, res) => {
+router.post('/fetchProfile', (req, res) => {
     // Get the auth token from the request
-    const authToken = req.query.authToken;
+    const authToken = req.body.authToken;
 
     // TODO: Implement logic to fetch profile metadata using the auth token
 
@@ -21,9 +21,9 @@ router.get('fetchProfile', (req, res) => {
 });
 
 // SaveProfile route
-router.post('saveProfile', (req, res) => {
+router.post('/saveProfile', (req, res) => {
     // Get the auth token and updated profile metadata from the request body
-    const { authToken, updatedProfileMetadata } = req.body;
+    let { authToken, updatedProfileMetadata } = req.body;
 
     // TODO: Implement logic to save the updated profile metadata using the auth token
 

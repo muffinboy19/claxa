@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const lesson = require('../../utils/constants')
+const lesson = require('../../utils/constants');
 
 router.post('/fetchNextLesson', (req, res) => {
-    const { authToken, currentLessonIndex, currentDifficultyLevel } = req.body;
+    let { authToken, currentLessonIndex, currentDifficultyLevel } = req.body;
     // Implement your logic here to fetch the next lesson based on the provided inputs
     res.json(lesson);
 });
