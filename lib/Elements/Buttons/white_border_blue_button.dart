@@ -35,7 +35,7 @@ class white_border_blue_button extends StatelessWidget {
           text,
           style: const TextStyle(
             fontFamily: 'boxx',
-            color: White50,
+            color: lightSkyBlue,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),

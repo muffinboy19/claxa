@@ -74,7 +74,7 @@ class AfterLandingPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   white_border_blue_button(
-                    text: loginButtonText,
+                    text: alreadyHaveAccountText,
                     borderRadius: 15,
                     onPressed: () {
                       Navigator.pushNamed(context, '/login');

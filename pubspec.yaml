@@ -65,6 +65,10 @@ flutter:
     - assets/svg/118.svg
     - assets/svg/312.svg
     - assets/png/gleopic.png
+    - assets/png/facebook.png
+    - assets/png/linkdin.png
+    - assets/png/google.png
+
 
 
 
