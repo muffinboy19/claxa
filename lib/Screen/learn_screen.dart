@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
+
+
 class LearnScreen extends StatelessWidget {
-  const LearnScreen({super.key});
+  const LearnScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: const [
+          children: [
             PositionedWidgets(),
           ],
         ),
@@ -18,7 +20,7 @@ class LearnScreen extends StatelessWidget {
 }
 
 class PositionedWidgets extends StatefulWidget {
-  const PositionedWidgets({super.key});
+  const PositionedWidgets({Key? key});
 
   @override
   _PositionedWidgetsState createState() => _PositionedWidgetsState();
@@ -33,20 +35,20 @@ class _PositionedWidgetsState extends State<PositionedWidgets> {
     return Stack(
       children: [
         CustomPaint(
-          size: Size(double.infinity, numberOfLessons * 200.0), // Adjust the size of the CustomPaint
+          size: Size(double.infinity, numberOfLessons * 200.0),
           painter: DashedLinePainter(numberOfLessons),
         ),
         Column(
           children: List.generate(
             numberOfLessons,
                 (index) {
-              const verticalSpacing = 160.0; // Increased vertical spacing between each card
-              final horizontalDisplacement = (index % 2 == 0) ? -20.0 : 20.0; // Alternating horizontal displacement
+              const verticalSpacing = 160.0;
+              final horizontalDisplacement = (index % 2 == 0) ? -120.0 : 120.0; // Increased horizontal displacement
 
               return Padding(
                 padding: const EdgeInsets.only(top: verticalSpacing),
-                child: Container(
-                  width: double.infinity, // Make the container width match the screen width
+                child: SizedBox(
+                  width: double.infinity,
                   child: Center(
                     child: Transform.translate(
                       offset: Offset(horizontalDisplacement, 0.0),
@@ -68,7 +70,56 @@ class _PositionedWidgetsState extends State<PositionedWidgets> {
             },
           ),
         ),
+        if (selectedLesson != -1)
+          AnimatedVerticalCard(
+            lessonNumber: selectedLesson + 1,
+          ),
       ],
+    );
+  }
+}
+
+class AnimatedVerticalCard extends StatelessWidget {
+  final int lessonNumber;
+
+  const AnimatedVerticalCard({Key? key, required this.lessonNumber}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+      transform: Matrix4.identity()
+        ..setEntry(3, 2, 0.001) // Add perspective
+        ..rotateX(-0.5), // Rotate along the X-axis for a 3D effect
+      child: VerticalCard(
+        lessonNumber: lessonNumber,
+      ),
+    );
+  }
+}
+
+class VerticalCard extends StatelessWidget {
+  final int lessonNumber;
+
+  const VerticalCard({Key? key, required this.lessonNumber}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      height: 300,
+      color: Colors.blue,
+      child: Center(
+        child: Text(
+          'Lesson $lessonNumber',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -82,20 +133,25 @@ class DashedLinePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
       ..color = Colors.blue
-      ..strokeWidth = 2;
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
 
-    double dashWidth = 10;
-    double dashSpace = 5;
-    double startY = 0;
     double startX = size.width / 2;
+    double startY = 80; // Start from the top of the first card
 
-    for (int i = 0; i < numberOfLessons; i++) {
-      double cardCenterY = startY + 80 + i * 160; // Adjust to start from the first card and space out vertically
-      while (startY < cardCenterY) {
-        canvas.drawLine(Offset(startX, startY), Offset(startX, startY + dashWidth), paint);
-        startY += dashWidth + dashSpace;
-      }
-      startY = cardCenterY + dashSpace; // Move to the next card
+    for (int i = 0; i < numberOfLessons - 1; i++) {
+      double cardCenterY = (i * 160) + 80; // Calculate card's center Y position
+      canvas.drawLine(
+        Offset(startX, startY),
+        Offset(startX, cardCenterY),
+        paint,
+      );
+      canvas.drawLine(
+        Offset(startX, cardCenterY),
+        Offset(startX, cardCenterY + 80), // Draw a dashed line to the bottom of the card
+        paint,
+      );
+      startY = cardCenterY + 160; // Move startY to the bottom of the next card
     }
   }
 
@@ -109,7 +165,7 @@ class LessonWidget extends StatelessWidget {
   final int lessonNumber;
   final bool selected;
 
-  const LessonWidget({super.key, required this.lessonNumber, required this.selected});
+  const LessonWidget({Key? key, required this.lessonNumber, required this.selected});
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +176,7 @@ class LessonWidget extends StatelessWidget {
         color: selected ? Colors.green : Colors.blue,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: selected ? Colors.red : Colors.transparent, // Change border color when selected
+          color: selected ? Colors.red : Colors.transparent,
           width: 3,
         ),
       ),
