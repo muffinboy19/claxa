@@ -1,192 +1,149 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(MaterialApp(home: LessonMapScreen()));
+}
 
-
-class LearnScreen extends StatelessWidget {
-  const LearnScreen({Key? key});
+class LessonMapScreen extends StatelessWidget {
+  final List<bool> completedLessons = [false, false, false, false];
+  final List<Offset> lessonPositions = [
+    Offset(50, 350),
+    Offset(150, 250),
+    Offset(250, 150),
+    Offset(350, 50),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            PositionedWidgets(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class PositionedWidgets extends StatefulWidget {
-  const PositionedWidgets({Key? key});
-
-  @override
-  _PositionedWidgetsState createState() => _PositionedWidgetsState();
-}
-
-class _PositionedWidgetsState extends State<PositionedWidgets> {
-  int numberOfLessons = 10;
-  int selectedLesson = -1;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        CustomPaint(
-          size: Size(double.infinity, numberOfLessons * 200.0),
-          painter: DashedLinePainter(numberOfLessons),
-        ),
-        Column(
-          children: List.generate(
-            numberOfLessons,
-                (index) {
-              const verticalSpacing = 160.0;
-              final horizontalDisplacement = (index % 2 == 0) ? -120.0 : 120.0; // Increased horizontal displacement
-
-              return Padding(
-                padding: const EdgeInsets.only(top: verticalSpacing),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Center(
-                    child: Transform.translate(
-                      offset: Offset(horizontalDisplacement, 0.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedLesson = index;
-                          });
-                        },
-                        child: LessonWidget(
-                          lessonNumber: index + 1,
-                          selected: selectedLesson == index,
-                        ),
-                      ),
+    return Scaffold(
+      appBar: AppBar(title: Text('Learning Path')),
+      body: Stack(
+        children: [
+          CustomPaint(
+            size: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height),
+            painter: PathwayPainter(lessonPositions: lessonPositions, completedLessons: completedLessons),
+          ),
+          ...List.generate(lessonPositions.length, (index) {
+            return LessonNode(
+              position: lessonPositions[index],
+              label: '${index + 1}',
+              completed: completedLessons[index],
+              onTap: () {
+                if (index > 0 && completedLessons[index - 1]) {
+                  completedLessons[index] = true;
+                  Navigator.of(context).popUntil(ModalRoute.withName('/'));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LessonMapScreen(),
                     ),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-        if (selectedLesson != -1)
-          AnimatedVerticalCard(
-            lessonNumber: selectedLesson + 1,
-          ),
-      ],
-    );
-  }
-}
-
-class AnimatedVerticalCard extends StatelessWidget {
-  final int lessonNumber;
-
-  const AnimatedVerticalCard({Key? key, required this.lessonNumber}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-      transform: Matrix4.identity()
-        ..setEntry(3, 2, 0.001) // Add perspective
-        ..rotateX(-0.5), // Rotate along the X-axis for a 3D effect
-      child: VerticalCard(
-        lessonNumber: lessonNumber,
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Incomplete Lesson'),
+                        content: Text('You need to complete the previous lesson first.'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+            );
+          }),
+        ],
       ),
     );
   }
 }
 
-class VerticalCard extends StatelessWidget {
-  final int lessonNumber;
+class PathwayPainter extends CustomPainter {
+  final List<Offset> lessonPositions;
+  final List<bool> completedLessons;
 
-  const VerticalCard({Key? key, required this.lessonNumber}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      height: 300,
-      color: Colors.blue,
-      child: Center(
-        child: Text(
-          'Lesson $lessonNumber',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class DashedLinePainter extends CustomPainter {
-  final int numberOfLessons;
-
-  DashedLinePainter(this.numberOfLessons);
+  PathwayPainter({required this.lessonPositions, required this.completedLessons});
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
+    final paint = Paint()
       ..color = Colors.blue
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 4.0;
 
-    double startX = size.width / 2;
-    double startY = 80; // Start from the top of the first card
+    final completedPaint = Paint()
+      ..color = Colors.green
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 4.0;
 
-    for (int i = 0; i < numberOfLessons - 1; i++) {
-      double cardCenterY = (i * 160) + 80; // Calculate card's center Y position
+    final path = Path();
+    for (int i = 0; i < lessonPositions.length; i++) {
+      if (i == 0) {
+        path.moveTo(lessonPositions[i].dx, lessonPositions[i].dy);
+      } else {
+        path.quadraticBezierTo(
+          lessonPositions[i - 1].dx + 30,
+          lessonPositions[i - 1].dy - 30,
+          lessonPositions[i].dx,
+          lessonPositions[i].dy,
+        );
+      }
+      if (completedLessons[i]) {
+        canvas.drawPath(path, completedPaint);
+      } else {
+        canvas.drawPath(path, paint);
+      }
+    }
+
+    final dashedPaint = Paint()
+      ..color = Colors.blue
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.0;
+
+    for (int i = 0; i < lessonPositions.length - 1; i++) {
       canvas.drawLine(
-        Offset(startX, startY),
-        Offset(startX, cardCenterY),
-        paint,
+        lessonPositions[i],
+        lessonPositions[i + 1],
+        completedLessons[i] && completedLessons[i + 1] ? completedPaint : dashedPaint,
       );
-      canvas.drawLine(
-        Offset(startX, cardCenterY),
-        Offset(startX, cardCenterY + 80), // Draw a dashed line to the bottom of the card
-        paint,
-      );
-      startY = cardCenterY + 160; // Move startY to the bottom of the next card
     }
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
   }
 }
 
-class LessonWidget extends StatelessWidget {
-  final int lessonNumber;
-  final bool selected;
+class LessonNode extends StatelessWidget {
+  final Offset position;
+  final String label;
+  final bool completed;
+  final VoidCallback onTap;
 
-  const LessonWidget({Key? key, required this.lessonNumber, required this.selected});
+  LessonNode({required this.position, required this.label, required this.completed, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 60,
-      height: 80,
-      decoration: BoxDecoration(
-        color: selected ? Colors.green : Colors.blue,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: selected ? Colors.red : Colors.transparent,
-          width: 3,
-        ),
-      ),
-      child: Center(
-        child: Text(
-          lessonNumber.toString(),
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+    return Positioned(
+      left: position.dx - 20,
+      top: position.dy - 20,
+      child: GestureDetector(
+        onTap: onTap,
+        child: CircleAvatar(
+          radius: 20,
+          backgroundColor: completed ? Colors.green : Colors.blue,
+          child: Text(
+            label,
+            style: TextStyle(color: Colors.white),
           ),
         ),
       ),

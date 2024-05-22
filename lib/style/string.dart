@@ -11,5 +11,6 @@ const String imageAssetPath = 'assets/png/gleopic.png';
 const String welcomeText = 'WELCOME BACK!!';
 const String emailHint = 'Enter email-id/Phone No.';
 const String passwordHint = 'Enter password';
+const String phoneHint = 'Enter phone number';
 const String continueButtonText = 'Continue';
 const String alreadyHaveAccountText = 'I ALREADY HAVE AN ACCOUNT';

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # gleo_x
 
 A new Flutter project.

@@ -13,3 +13,16 @@ const Color inputFieldColor = Color(0xFFC7DCE4);
 const Color lightGrey = Color(0xFFD3D9D5);
 const Color lightblueBackground = Color(0xFF60A6C1);
 
+
+
+const Color deepPurple = Color(0xFF4E0760);
+const Color lightPurple = Color(0xFFDF9AFF);
+const Color lavender = Color(0xFFE5CDFF);
+const Color paleLavender = Color(0xFFFAF1FF);
+const Color greyWhite = Color(0xABFFFFFF);
+const Color greyBlack = Color(0xFF212A31);
+
+
+
+
+

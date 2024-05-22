@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:gleo_x/Screen/AfterLandingPage.dart';
 import 'package:gleo_x/Screen/HomePage.dart';
+import 'package:gleo_x/Screen/SplashPage.dart';
+import 'package:gleo_x/Screen/detailsPage.dart';
 import 'package:gleo_x/Screen/forgetPassword.dart';
 import 'package:gleo_x/Screen/otpPage.dart';
-
-import 'Screen/LoginPage.dart';
+import 'package:gleo_x/Screen/RegisterPage.dart';
 import 'Screen/Question/questionScreen.dart';
-import 'Screen/SignUpPage.dart';
-import 'Screen/SplashPage.dart';
+
 import 'Screen/landingPage.dart';
+import 'Screen/LoginPage.dart';
+import 'Screen/learn_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,15 +32,16 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       debugShowCheckedModeBanner: false, // Set this to false
       routes: {
-        '/': (context) => const LoginPage(),
-        '/landing': (context) => LandingPage(),
+        '/': (context) =>   SplashScreen(),
         '/login': (context) => const LoginPage(),
-        '/signup': (context) => const SignupPage(),
         '/home': (context) => const HomePage(),
         '/forgot-password': (context) => const ForgotPasswordScreen(),
         '/otp-verification': (context) => const OTPVerificationScreen(),
         '/quiz': (context) => const QuizScreen(),
-        '/AfterLandingPage': (context) =>  AfterLandingPage(),
+        '/learn': (context) =>  LessonMapScreen(),
+        '/LandingPage': (context) => const LandingPage(),
+        '/register': (context) => const RegisterPage(),
+        '/details': (context) => const DetailsPage(),
       },
     );
   }

@@ -10,8 +10,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed('/landing');
+    Timer(const Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacementNamed('/LandingPage');
     });
   }
 
