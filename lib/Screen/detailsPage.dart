@@ -160,14 +160,15 @@ class _DetailsPageState extends State<DetailsPage> {
                         backgroundColor: deepPurple,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
+                          side: const BorderSide(color: Colors.white, width: 2),
                         ),
                         elevation: 5,
                         shadowColor: Colors.black,
-                        minimumSize: Size(double.infinity, 50), // Adjust button width
+                        minimumSize: const Size(double.infinity, 35), // Adjust button width
                       ),
                       child: const Padding(
                         padding: EdgeInsets.symmetric(
-                            vertical: 16.0, horizontal: 32.0),
+                            vertical: 7.0, horizontal: 32.0),
                         child: Text(
                           "Sign Up",
                           style: TextStyle(
