@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gleo_x/style/colour.dart'; // Ensure this path is correct
-import '../style/string.dart';
+import '../style/string.dart'; // Ensure this path is correct
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -59,7 +59,7 @@ class LandingPage extends StatelessWidget {
                           shadowColor: Colors.black, // Shadow color
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/learn');
+                          Navigator.pushNamed(context, '/register');
                         },
                         child: const Text(
                           createAccountButtonText,
@@ -78,7 +78,7 @@ class LandingPage extends StatelessWidget {
                           backgroundColor: deepPurple,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
-                            side: const BorderSide(color: White, width: 2),
+                            side: const BorderSide(color: Colors.white, width: 2),
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 15),
                           minimumSize: Size(double.infinity, 50), // Ensures the button width is the same as the phone width

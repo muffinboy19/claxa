@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gleo_x/Elements/Buttons/white_button.dart';
 import 'package:gleo_x/style/colour.dart';
 import '../style/string.dart';
+import 'home_screen.dart'; // Import the home screen file
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({Key? key}) : super(key: key);
@@ -41,96 +41,152 @@ class _DetailsPageState extends State<DetailsPage> {
       HapticFeedback.vibrate();
       // Handle empty field case here
     } else {
-      // Perform the sign-up action
+      // Check if all fields are completed
+      if (_completedFields == 5) {
+        // Navigate to the home screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  HomeScreen()), // Replace HomeScreen() with your home screen widget
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightblueBackground, // Change to the previous color theme
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                const Text(
-                  appName,
-                  style: TextStyle(
-                    fontFamily: 'boxx',
-                    color: White,
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 30.0),
-                _buildFeedbackBar(), // Moved feedback bar here
-                const SizedBox(height: 20.0), // Added spacing
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    color: lightblueBackground,
-                    borderRadius: BorderRadius.circular(15.0),
-                    border: Border.all(
-                      color: White,
-                      width: 0.5,
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _buildTextField(
-                        controller: _nameController,
-                        hint: "Name",
-                        icon: Icons.person,
-                        onChanged: _updateProgress,
-                      ),
-                      const SizedBox(height: 20.0),
-                      _buildTextField(
-                        controller: _ageController,
-                        hint: "Age",
-                        icon: Icons.calendar_today,
-                        onChanged: _updateProgress,
-                        keyboardType: TextInputType.number,
-                      ),
-                      const SizedBox(height: 20.0),
-                      _buildTextField(
-                        controller: _professionController,
-                        hint: "Profession",
-                        icon: Icons.work,
-                        onChanged: _updateProgress,
-                      ),
-                      const SizedBox(height: 20.0),
-                      _buildTextField(
-                        controller: _pronounController,
-                        hint: "Pronoun",
-                        icon: Icons.person_outline,
-                        onChanged: _updateProgress,
-                      ),
-                      const SizedBox(height: 20.0),
-                      _buildTextField(
-                        controller: _experienceController,
-                        hint: "Years of Experience",
-                        icon: Icons.timeline,
-                        onChanged: _updateProgress,
-                        keyboardType: TextInputType.number,
-                      ),
-                      const SizedBox(height: 20.0),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 30.0),
-                WhiteButton(
-                  text: "Sign Up",
-                  borderRadius: 15,
-                  onPressed: _onSignUp,
-                ),
-              ],
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/png/loginPageBackground.png',
+              fit: BoxFit.cover,
             ),
           ),
-        ),
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/png/gleopic.png', // Replace with your image asset path
+                          height: 56.0,
+                          fit: BoxFit.contain,
+                        ),
+                        const SizedBox(width: 10.0),
+                        const Text(
+                          appName,
+                          style: TextStyle(
+                            fontFamily: 'boxx',
+                            color: deepPurple, // Changed to deepPurple
+                            fontSize: 56,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                      ],
+                    ),
+                    const SizedBox(height: 30.0),
+                    _buildFeedbackBar(),
+                    const SizedBox(height: 20.0),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color:  greyWhite,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildLabelText('Name'),
+                            _buildTextField(
+                              controller: _nameController,
+                              hint: "Name",
+                              icon: Icons.person,
+                              onChanged: _updateProgress,
+                            ),
+                            const SizedBox(height: 20.0),
+                            _buildLabelText('Age'),
+                            _buildTextField(
+                              controller: _ageController,
+                              hint: "Age",
+                              icon: Icons.calendar_today,
+                              onChanged: _updateProgress,
+                              keyboardType: TextInputType.number,
+                            ),
+                            const SizedBox(height: 20.0),
+                            _buildLabelText('Profession'),
+                            _buildTextField(
+                              controller: _professionController,
+                              hint: "Profession",
+                              icon: Icons.work,
+                              onChanged: _updateProgress,
+                            ),
+                            const SizedBox(height: 20.0),
+                            _buildLabelText('Pronoun'),
+                            _buildTextField(
+                              controller: _pronounController,
+                              hint: "Pronoun",
+                              icon: Icons.person_outline,
+                              onChanged: _updateProgress,
+                            ),
+                            const SizedBox(height: 20.0),
+                            _buildLabelText('Years of Experience'),
+                            _buildTextField(
+                              controller: _experienceController,
+                              hint: "Years of Experience",
+                              icon: Icons.timeline,
+                              onChanged: _updateProgress,
+                              keyboardType: TextInputType.number,
+                            ),
+                            const SizedBox(height: 20.0),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20.0),
+                    ElevatedButton(
+                      onPressed: _onSignUp,
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: deepPurple,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        elevation: 5,
+                        shadowColor: Colors.black,
+                        minimumSize: Size(double.infinity, 50), // Adjust button width
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 32.0),
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(
+                            fontFamily: 'boxx',
+                            color: White,
+                            fontSize: 32, // Adjust button font size
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                        height:
+                        20.0), // Adjusted to make space for the new button position
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -142,41 +198,68 @@ class _DetailsPageState extends State<DetailsPage> {
     required void Function() onChanged,
     TextInputType keyboardType = TextInputType.text,
   }) {
-    return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        hintText: hint,
-        hintStyle: const TextStyle(
-          color: Black57,
-          fontSize: 18,
-          fontFamily: 'boxx',
-        ),
-        filled: true,
-        fillColor: inputFieldColor,
-        border: OutlineInputBorder(
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+        color: greyWhite, // Background color of input box
+
+      ),
+      child: Card(
+        elevation: 0, // Remove elevation from Card
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
-          borderSide: BorderSide.none,
         ),
-        prefixIcon: Icon(icon, color: Black57),
+        child: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+            hintText: hint,
+            hintStyle: const TextStyle(
+              color: greyBlack,
+              fontSize: 16,
+              fontFamily: 'boxx',
+            ),
+            filled: true,
+            fillColor: Colors.transparent, // Make the Card transparent
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20.0),
+              borderSide: BorderSide.none,
+            ),
+            prefixIcon: Icon(icon, color: greyBlack), // Changed icon color to greyBlack
+          ),
+          keyboardType: keyboardType,
+          textAlign: TextAlign.start,
+          style: const TextStyle(
+            color: greyBlack,
+            fontSize: 18,
+            height: 1.5,
+          ),
+          onChanged: (_) => onChanged(),
+        ),
       ),
-      keyboardType: keyboardType,
-      textAlign: TextAlign.start,
-      style: const TextStyle(
-        color: Black57,
-        fontSize: 18,
-        height: 1.5,
+    );
+  }
+
+  Widget _buildLabelText(String text) {
+    return Container(
+      color: Colors.transparent, // Background color for the label
+      padding: const EdgeInsets.symmetric(vertical: .0),
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: greyBlack, // Text color
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
       ),
-      onChanged: (_) => onChanged(),
     );
   }
 
   Widget _buildFeedbackBar() {
     return LinearProgressIndicator(
       value: _completedFields / 5,
-      backgroundColor: Colors.grey[300],
-      color: primaryColor,
+      backgroundColor: greyWhite,
+      color: Colors.deepPurple,
     );
   }
 }
-

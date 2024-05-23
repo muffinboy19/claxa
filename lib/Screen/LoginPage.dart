@@ -216,9 +216,9 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Spacer(),
+                        // const Spacer(),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 20.0), // Add bottom padding
+                          padding: const EdgeInsets.only(top: 20.0), // Add bottom padding
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
