@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       debugShowCheckedModeBanner: false, // Set this to false
       routes: {
-        '/': (context) =>   SplashScreen(),
+        '/': (context) =>   const HomePage(),
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
         '/forgot-password': (context) => const ForgotPasswordScreen(),

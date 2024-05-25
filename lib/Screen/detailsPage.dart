@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gleo_x/Screen/HomePage.dart';
 import 'package:gleo_x/style/colour.dart';
 import '../style/string.dart';
-import 'home_screen.dart'; // Import the home screen file
+// Import the home screen file
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class _DetailsPageState extends State<DetailsPage> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  HomeScreen()), // Replace HomeScreen() with your home screen widget
+                   HomePage()), // Replace HomeScreen() with your home screen widget
         );
       }
     }

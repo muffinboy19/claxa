@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert'; // For jsonEncode and jsonDecode
 import 'package:gleo_x/style/colour.dart'; // Ensure this path is correct
 import '../style/string.dart';
 
@@ -7,6 +9,54 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Controllers for text fields
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
+    // Function to handle login
+    Future<void> handleLogin() async {
+      final response = await http.post(
+        Uri.parse('http://your-server-url/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'validLogin': true,
+          'email': emailController.text,
+          'password': passwordController.text,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        // Handle successful login, e.g., save token, navigate to another screen
+        print('Login successful: ${responseData['authToken']}');
+      } else {
+        // Handle error
+        print('Login failed: ${response.statusCode}');
+      }
+    }
+
+    // Function to handle signup
+    Future<void> handleSignup() async {
+      final response = await http.post(
+        Uri.parse('http://your-server-url/signup'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'validLogin': true,
+          'email': emailController.text,
+          'password': passwordController.text,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        // Handle successful signup, e.g., save token, navigate to another screen
+        print('Signup successful: ${responseData['authToken']}');
+      } else {
+        // Handle error
+        print('Signup failed: ${response.statusCode}');
+      }
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: ConstrainedBox(
@@ -74,6 +124,7 @@ class LoginPage extends StatelessWidget {
                                   width: MediaQuery.of(context).size.width * 0.8,
                                   height: 60,
                                   child: TextField(
+                                    controller: emailController,
                                     decoration: InputDecoration(
                                       contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                                       hintText: emailHint,
@@ -103,6 +154,7 @@ class LoginPage extends StatelessWidget {
                                   width: MediaQuery.of(context).size.width * 0.8,
                                   height: 60,
                                   child: TextField(
+                                    controller: passwordController,
                                     decoration: InputDecoration(
                                       contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                                       hintText: passwordHint,
@@ -129,7 +181,8 @@ class LoginPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 20.0),
                                 ElevatedButton(
-                                  onPressed: () {
+                                  onPressed: () async {
+                                    await handleLogin();
                                     Navigator.pushNamed(context, '/details');
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -232,7 +285,8 @@ class LoginPage extends StatelessWidget {
                               elevation: 5,
                               shadowColor: Colors.black,
                             ),
-                            onPressed: () {
+                            onPressed: () async {
+                              await handleSignup();
                               Navigator.pushNamed(context, '/register');
                             },
                             child: const Text(
