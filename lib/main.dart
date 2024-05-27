@@ -7,6 +7,7 @@ import 'package:gleo_x/Screen/forgetPassword.dart';
 import 'package:gleo_x/Screen/otpPage.dart';
 import 'package:gleo_x/Screen/RegisterPage.dart';
 import 'Screen/Question/questionScreen.dart';
+import 'Screen/Question/QuestionType1.dart';
 
 import 'Screen/landingPage.dart';
 import 'Screen/LoginPage.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       debugShowCheckedModeBanner: false, // Set this to false
       routes: {
-        '/': (context) =>   const HomePage(),
+        '/': (context) =>    QuestionType1pageWidget(),
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
         '/forgot-password': (context) => const ForgotPasswordScreen(),
