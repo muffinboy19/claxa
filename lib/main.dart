@@ -6,8 +6,7 @@ import 'package:gleo_x/Screen/detailsPage.dart';
 import 'package:gleo_x/Screen/forgetPassword.dart';
 import 'package:gleo_x/Screen/otpPage.dart';
 import 'package:gleo_x/Screen/RegisterPage.dart';
-import 'Screen/Question/questionScreen.dart';
-import 'Screen/Question/QuestionType1.dart';
+import 'Screen/Question/question1widget.dart';
 
 import 'Screen/landingPage.dart';
 import 'Screen/LoginPage.dart';
@@ -44,7 +43,6 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/forgot-password': (context) => const ForgotPasswordScreen(),
         '/otp-verification': (context) => const OTPVerificationScreen(),
-        '/quiz': (context) => const QuizScreen(),
         '/learn': (context) =>  LessonMapScreen(),
         '/LandingPage': (context) => const LandingPage(),
         '/register': (context) => const RegisterPage(),
