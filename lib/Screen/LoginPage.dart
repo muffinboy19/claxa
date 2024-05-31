@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // For jsonEncode and jsonDecode
 import 'package:gleo_x/style/colour.dart'; // Ensure this path is correct
+import 'package:shared_preferences/shared_preferences.dart'; // For storing the token
 import '../style/string.dart';
 
 class LoginPage extends StatelessWidget {
@@ -16,44 +17,28 @@ class LoginPage extends StatelessWidget {
     // Function to handle login
     Future<void> handleLogin() async {
       final response = await http.post(
-        Uri.parse('http://your-server-url/login'),
+        Uri.parse('https://gleoai.com/api/v2/auth/login'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          'validLogin': true,
           'email': emailController.text,
           'password': passwordController.text,
+          'validLogin':'true'
         }),
       );
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         // Handle successful login, e.g., save token, navigate to another screen
-        print('Login successful: ${responseData['authToken']}');
+        final token = responseData['authToken'];
+
+        // Save token in shared preferences
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('authToken', token);
+
+        print('Login successful: $token');
       } else {
         // Handle error
         print('Login failed: ${response.statusCode}');
-      }
-    }
-
-    // Function to handle signup
-    Future<void> handleSignup() async {
-      final response = await http.post(
-        Uri.parse('http://your-server-url/signup'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'validLogin': true,
-          'email': emailController.text,
-          'password': passwordController.text,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        // Handle successful signup, e.g., save token, navigate to another screen
-        print('Signup successful: ${responseData['authToken']}');
-      } else {
-        // Handle error
-        print('Signup failed: ${response.statusCode}');
       }
     }
 
@@ -87,12 +72,14 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 30.0), // Add padding here
+                          padding: const EdgeInsets.only(
+                              top: 30.0), // Add padding here
                           child: Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(20.0),
                             decoration: BoxDecoration(
-                              color: greyWhite.withOpacity(0.8), // Add opacity for better text visibility
+                              color: greyWhite.withOpacity(
+                                  0.8), // Add opacity for better text visibility
                               borderRadius: BorderRadius.circular(15.0),
                               border: Border.all(
                                 color: Colors.white,
@@ -113,20 +100,26 @@ class LoginPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 16.0),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 0.0),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 0.0),
                                   child: Image.asset(
                                     'assets/png/gleopic.png',
                                     height: 120,
                                   ),
                                 ),
-                                const SizedBox(height: 10.0), // Increased spacing between the image and input field
+                                const SizedBox(
+                                    height:
+                                        10.0), // Increased spacing between the image and input field
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.8,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
                                   height: 60,
                                   child: TextField(
                                     controller: emailController,
                                     decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              vertical: 10, horizontal: 20),
                                       hintText: emailHint,
                                       hintStyle: const TextStyle(
                                         color: greyBlack,
@@ -136,7 +129,8 @@ class LoginPage extends StatelessWidget {
                                       filled: true,
                                       fillColor: lavender,
                                       border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20.0),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                         borderSide: BorderSide.none,
                                       ),
                                     ),
@@ -151,12 +145,15 @@ class LoginPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 5.0),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.8,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
                                   height: 60,
                                   child: TextField(
                                     controller: passwordController,
                                     decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              vertical: 10, horizontal: 20),
                                       hintText: passwordHint,
                                       hintStyle: const TextStyle(
                                         color: greyBlack,
@@ -166,7 +163,8 @@ class LoginPage extends StatelessWidget {
                                       filled: true,
                                       fillColor: lavender,
                                       border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(20.0),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                         borderSide: BorderSide.none,
                                       ),
                                     ),
@@ -183,11 +181,13 @@ class LoginPage extends StatelessWidget {
                                 ElevatedButton(
                                   onPressed: () async {
                                     await handleLogin();
-                                    Navigator.pushNamed(context, '/details');
+                                    Navigator.pushNamed(context, '/home');
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: deepPurple,
-                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5), // Decreased size
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                        vertical: 5), // Decreased size
                                     minimumSize: const Size.fromHeight(40),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20),
@@ -205,7 +205,9 @@ class LoginPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 5.0), // Padding below the continue button
+                                const SizedBox(
+                                    height:
+                                        5.0), // Padding below the continue button
                                 const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -271,22 +273,24 @@ class LoginPage extends StatelessWidget {
                         ),
                         // const Spacer(),
                         Padding(
-                          padding: const EdgeInsets.only(top: 20.0), // Add bottom padding
+                          padding: const EdgeInsets.only(
+                              top: 20.0), // Add bottom padding
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
                               backgroundColor: deepPurple,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                side: const BorderSide(color: Colors.white, width: 2),
+                                side: const BorderSide(
+                                    color: Colors.white, width: 2),
                               ),
-                              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 20),
                               minimumSize: const Size(double.infinity, 50),
                               elevation: 5,
                               shadowColor: Colors.black,
                             ),
                             onPressed: () async {
-                              await handleSignup();
                               Navigator.pushNamed(context, '/register');
                             },
                             child: const Text(

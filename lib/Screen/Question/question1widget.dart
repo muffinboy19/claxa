@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class QuestionType1pageWidget extends StatefulWidget {
-  const QuestionType1pageWidget({Key? key}) : super(key: key);
+class question1widget extends StatefulWidget {
+  const question1widget({Key? key}) : super(key: key);
 
   @override
-  State<QuestionType1pageWidget> createState() => _QuestionType1pageWidgetState();
+  State<question1widget> createState() => _question1widget();
 }
 
-class _QuestionType1pageWidgetState extends State<QuestionType1pageWidget> {
+class _question1widget extends State<question1widget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

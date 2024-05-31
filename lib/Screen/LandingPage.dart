@@ -23,7 +23,12 @@ class LandingPage extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 0.0),
                   child: Column(
                     children: [
-                      const SizedBox(height: 200), // Increased spacing to bring down the app name text
+                      const SizedBox(height: 200),
+                      Image.asset(
+                        imageAssetPath,
+                        height: 200,
+                      ),// Increased spacing to bring down the app name text
+                      const SizedBox(height: 10), // Reduced spacing to bring the app name closer to the image
                       const Text(
                         appName,
                         style: TextStyle(
@@ -32,11 +37,6 @@ class LandingPage extends StatelessWidget {
                           fontSize: 64, // Increased font size
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
-                      const SizedBox(height: 5), // Reduced spacing to bring the app name closer to the image
-                      Image.asset(
-                        imageAssetPath,
-                        height: 200,
                       ),
                     ],
                   ),

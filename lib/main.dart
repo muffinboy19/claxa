@@ -38,12 +38,12 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       debugShowCheckedModeBanner: false, // Set this to false
       routes: {
-        '/': (context) =>    QuestionType1pageWidget(),
+        '/': (context) =>    SplashScreen(),
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
-        '/forgot-password': (context) => const ForgotPasswordScreen(),
+        '/forgot-password': (context) => const noxo(),
         '/otp-verification': (context) => const OTPVerificationScreen(),
-        '/learn': (context) =>  LessonMapScreen(),
+        '/learn': (context) =>  Example(),
         '/LandingPage': (context) => const LandingPage(),
         '/register': (context) => const RegisterPage(),
         '/details': (context) => const DetailsPage(),

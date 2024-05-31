@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:gleo_x/Screen/HomePage.dart';
 import 'package:gleo_x/style/colour.dart';
 import '../style/string.dart';
-// Import the home screen file
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({Key? key}) : super(key: key);
@@ -13,7 +12,8 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _professionController = TextEditingController();
   final TextEditingController _pronounController = TextEditingController();
@@ -24,7 +24,8 @@ class _DetailsPageState extends State<DetailsPage> {
   void _updateProgress() {
     setState(() {
       _completedFields = [
-        _nameController.text,
+        _firstNameController.text,
+        _lastNameController.text,
         _ageController.text,
         _professionController.text,
         _pronounController.text,
@@ -34,7 +35,8 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 
   void _onSignUp() {
-    if (_nameController.text.isEmpty ||
+    if (_firstNameController.text.isEmpty ||
+        _lastNameController.text.isEmpty ||
         _ageController.text.isEmpty ||
         _professionController.text.isEmpty ||
         _pronounController.text.isEmpty ||
@@ -43,13 +45,13 @@ class _DetailsPageState extends State<DetailsPage> {
       // Handle empty field case here
     } else {
       // Check if all fields are completed
-      if (_completedFields == 5) {
+      if (_completedFields == 6) {
         // Navigate to the home screen
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) =>
-                   HomePage()), // Replace HomeScreen() with your home screen widget
+                  HomePage()), // Replace HomeScreen() with your home screen widget
         );
       }
     }
@@ -90,7 +92,6 @@ class _DetailsPageState extends State<DetailsPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-
                       ],
                     ),
                     const SizedBox(height: 30.0),
@@ -100,17 +101,25 @@ class _DetailsPageState extends State<DetailsPage> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
-                        color:  greyWhite,
+                        color: greyWhite,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _buildLabelText('Name'),
+                            _buildLabelText('First Name'),
                             _buildTextField(
-                              controller: _nameController,
-                              hint: "Name",
+                              controller: _firstNameController,
+                              hint: "First Name",
+                              icon: Icons.person,
+                              onChanged: _updateProgress,
+                            ),
+                            const SizedBox(height: 20.0),
+                            _buildLabelText('Last Name'),
+                            _buildTextField(
+                              controller: _lastNameController,
+                              hint: "Last Name",
                               icon: Icons.person,
                               onChanged: _updateProgress,
                             ),
@@ -174,7 +183,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           "Sign Up",
                           style: TextStyle(
                             fontFamily: 'boxx',
-                            color: White,
+                            color: Colors.white,
                             fontSize: 32, // Adjust button font size
                           ),
                         ),
@@ -204,7 +213,6 @@ class _DetailsPageState extends State<DetailsPage> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
         color: greyWhite, // Background color of input box
-
       ),
       child: Card(
         elevation: 0, // Remove elevation from Card
@@ -259,7 +267,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
   Widget _buildFeedbackBar() {
     return LinearProgressIndicator(
-      value: _completedFields / 5,
+      value: _completedFields / 6,
       backgroundColor: greyWhite,
       color: Colors.deepPurple,
     );
